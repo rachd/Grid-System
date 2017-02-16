@@ -5,6 +5,7 @@
 	.row {
 		max-width: $content-max-width;
 		margin: 0 auto;
+		@include clearfix;
 
 		* {
 			box-sizing: border-box;
