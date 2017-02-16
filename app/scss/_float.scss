@@ -1,16 +1,19 @@
 .no-grid {
-	.container {
+	// .container {
+	// }
+
+	.row {
+		max-width: $content-max-width;
+		margin: 0 auto;
 
 		* {
 			box-sizing: border-box;
 		}
 	}
 
-	.row {
-	}
-
 	[class*='col-'] {
 		float: left;
+		width: 100%;
 	}
 
 	.col-xs-12 {

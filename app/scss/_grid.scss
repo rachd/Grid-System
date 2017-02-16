@@ -1,13 +1,15 @@
 .grid {
-	.container {
-		display: grid;
-		/*grid-auto-flow: column;*/
-		grid-template-columns: 1fr;
-	}
+	// .container {
+	// 	display: grid;
+	// 	grid-auto-flow: column;
+	// 	grid-template-columns: 1fr;
+	// }
 
 	.row {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
+		max-width: $content-max-width;
+		margin: 0 auto;
 	}
 
 	[class*='col-'] {
