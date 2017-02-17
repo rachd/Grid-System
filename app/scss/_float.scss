@@ -1,20 +1,24 @@
 .no-grid {
-	// .container {
-	// }
-
-	.row {
+	.container {
 		max-width: $content-max-width;
 		margin: 0 auto;
-		@include clearfix;
+		padding: 0 $gutter-width;
 
 		* {
 			box-sizing: border-box;
 		}
 	}
 
+	.row {
+		margin: 0 -$gutter-width;
+		@include clearfix;
+	}
+
 	[class*='col-'] {
 		float: left;
 		width: 100%;
+		min-height: 1px;
+		padding: 0 $gutter-width;
 	}
 
 	.col-xs-12 {
