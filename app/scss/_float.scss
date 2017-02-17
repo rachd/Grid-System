@@ -2,15 +2,12 @@
 	.container {
 		max-width: $content-max-width;
 		margin: 0 auto;
-		padding: 0 $gutter-width;
-
-		* {
-			box-sizing: border-box;
-		}
+		overflow: hidden;
 	}
 
 	.row {
-		margin: 0 -$gutter-width;
+		width: calc(100% + #{$gutter-width});
+		margin-left: -$half-gutter-width;
 		@include clearfix;
 	}
 
@@ -18,296 +15,296 @@
 		float: left;
 		width: 100%;
 		min-height: 1px;
-		padding: 0 $gutter-width;
+		margin: 0 $half-gutter-width;
 	}
 
 	.col-xs-12 {
-		width: 100%;
+		width: calc(100% - #{$gutter-width});
 	}
 	.col-xs-11 {
-		width: calc((100% / 12) * 11);
+		width: calc((100% / 12) * 11 - #{$gutter-width});
 	}
 	.col-xs-10 {
-		width: calc((100% / 12) * 10);
+		width: calc((100% / 12) * 10 - #{$gutter-width});
 	}
 	.col-xs-9 {
-		width: calc((100% / 12) * 9);
+		width: calc((100% / 12) * 9 - #{$gutter-width});
 	}
 	.col-xs-8 {
-		width: calc((100% / 12) * 8);
+		width: calc((100% / 12) * 8 - #{$gutter-width});
 	}
 	.col-xs-7 {
-		width: calc((100% / 12) * 7);
+		width: calc((100% / 12) * 7 - #{$gutter-width});
 	}
 	.col-xs-6 {
-		width: calc(100% / 2);
+		width: calc(100% / 2 - #{$gutter-width});
 	}
 	.col-xs-5 {
-		width: calc((100% / 12) * 5);
+		width: calc((100% / 12) * 5 - #{$gutter-width});
 	}
 	.col-xs-4 {
-		width: calc(100% / 3);
+		width: calc(100% / 3 - #{$gutter-width});
 	}
 	.col-xs-3 {
-		width: calc(100% / 4);
+		width: calc(100% / 4 - #{$gutter-width});
 	}
 	.col-xs-2 {
-		width: calc(100% / 6);
+		width: calc(100% / 6 - #{$gutter-width});
 	}
 	.col-xs-1 {
-		width: calc(100% / 12);
+		width: calc(100% / 12 - #{$gutter-width});
 	}
 
 	.offset-xs-11 {
-		margin-left: calc((100% / 12) * 11);
+		margin-left: calc((100% / 12) * 11 + #{$half-gutter-width});
 	}
 	.offset-xs-10 {
-		margin-left: calc((100% / 12) * 10);
+		margin-left: calc((100% / 12) * 10 + #{$half-gutter-width});
 	}
 	.offset-xs-9 {
-		margin-left: calc((100% / 12) * 9);
+		margin-left: calc((100% / 12) * 9 + #{$half-gutter-width});
 	}
 	.offset-xs-8 {
-		margin-left: calc((100% / 12) * 8);
+		margin-left: calc((100% / 12) * 8 + #{$half-gutter-width});
 	}
 	.offset-xs-7 {
-		margin-left: calc((100% / 12) * 7);
+		margin-left: calc((100% / 12) * 7 + #{$half-gutter-width});
 	}
 	.offset-xs-6 {
-		margin-left: calc(100% / 2);
+		margin-left: calc(100% / 2 + #{$half-gutter-width});
 	}
 	.offset-xs-5 {
-		margin-left: calc((100% / 12) * 5);
+		margin-left: calc((100% / 12) * 5 + #{$half-gutter-width});
 	}
 	.offset-xs-4 {
-		margin-left: calc(100% / 3);
+		margin-left: calc(100% / 3 + #{$half-gutter-width});
 	}
 	.offset-xs-3 {
-		margin-left: calc(100% / 4);
+		margin-left: calc(100% / 4 + #{$half-gutter-width});
 	}
 	.offset-xs-2 {
-		margin-left: calc(100% / 6);
+		margin-left: calc(100% / 6 + #{$half-gutter-width});
 	}
 	.offset-xs-1 {
-		margin-left: calc(100% / 12);
+		margin-left: calc(100% / 12 + #{$half-gutter-width});
 	}
 
 	@media (min-width: 768px) { /* sm md lg */
 		.col-sm-12 {
-			width: 100%;
+			width: calc(100% - #{$gutter-width});
 		}
 		.col-sm-11 {
-			width: calc((100% / 12) * 11);
+			width: calc((100% / 12) * 11 - #{$gutter-width});
 		}
 		.col-sm-10 {
-			width: calc((100% / 12) * 10);
+			width: calc((100% / 12) * 10 - #{$gutter-width});
 		}
 		.col-sm-9 {
-			width: calc((100% / 12) * 9);
+			width: calc((100% / 12) * 9 - #{$gutter-width});
 		}
 		.col-sm-8 {
-			width: calc((100% / 12) * 8);
+			width: calc((100% / 12) * 8 - #{$gutter-width});
 		}
 		.col-sm-7 {
-			width: calc((100% / 12) * 7);
+			width: calc((100% / 12) * 7 - #{$gutter-width});
 		}
 		.col-sm-6 {
-			width: calc(100% / 2);
+			width: calc(100% / 2 - #{$gutter-width});
 		}
 		.col-sm-5 {
-			width: calc((100% / 12) * 5);
+			width: calc((100% / 12) * 5 - #{$gutter-width});
 		}
 		.col-sm-4 {
-			width: calc(100% / 3);
+			width: calc(100% / 3 - #{$gutter-width});
 		}
 		.col-sm-3 {
-			width: calc(100% / 4);
+			width: calc(100% / 4 - #{$gutter-width});
 		}
 		.col-sm-2 {
-			width: calc(100% / 6);
+			width: calc(100% / 6 - #{$gutter-width});
 		}
 		.col-sm-1 {
-			width: calc(100% / 12);
+			width: calc(100% / 12 - #{$gutter-width});
 		}
 
 		.offset-sm-11 {
-			margin-left: calc((100% / 12) * 11);
+			margin-left: calc((100% / 12) * 11 + #{$half-gutter-width});
 		}
 		.offset-sm-10 {
-			margin-left: calc((100% / 12) * 10);
+			margin-left: calc((100% / 12) * 10 + #{$half-gutter-width});
 		}
 		.offset-sm-9 {
-			margin-left: calc((100% / 12) * 9);
+			margin-left: calc((100% / 12) * 9 + #{$half-gutter-width});
 		}
 		.offset-sm-8 {
-			margin-left: calc((100% / 12) * 8);
+			margin-left: calc((100% / 12) * 8 + #{$half-gutter-width});
 		}
 		.offset-sm-7 {
-			margin-left: calc((100% / 12) * 7);
+			margin-left: calc((100% / 12) * 7 + #{$half-gutter-width});
 		}
 		.offset-sm-6 {
-			margin-left: calc(100% / 2);
+			margin-left: calc(100% / 2 + #{$half-gutter-width});
 		}
 		.offset-sm-5 {
-			margin-left: calc((100% / 12) * 5);
+			margin-left: calc((100% / 12) * 5 + #{$half-gutter-width});
 		}
 		.offset-sm-4 {
-			margin-left: calc(100% / 3);
+			margin-left: calc(100% / 3 + #{$half-gutter-width});
 		}
 		.offset-sm-3 {
-			margin-left: calc(100% / 4);
+			margin-left: calc(100% / 4 + #{$half-gutter-width});
 		}
 		.offset-sm-2 {
-			margin-left: calc(100% / 6);
+			margin-left: calc(100% / 6 + #{$half-gutter-width});
 		}
 		.offset-sm-1 {
-			margin-left: calc(100% / 12);
+			margin-left: calc(100% / 12 + #{$half-gutter-width});
 		}
 	}
 
 	@media (min-width: 992px) { /* md and lg */
 		.col-md-12 {
-			width: 100%;
+			width: calc(100% - #{$gutter-width});
 		}
 		.col-md-11 {
-			width: calc((100% / 12) * 11);
+			width: calc((100% / 12) * 11 - #{$gutter-width});
 		}
 		.col-md-10 {
-			width: calc((100% / 12) * 10);
+			width: calc((100% / 12) * 10 - #{$gutter-width});
 		}
 		.col-md-9 {
-			width: calc((100% / 12) * 9);
+			width: calc((100% / 12) * 9 - #{$gutter-width});
 		}
 		.col-md-8 {
-			width: calc((100% / 12) * 8);
+			width: calc((100% / 12) * 8 - #{$gutter-width});
 		}
 		.col-md-7 {
-			width: calc((100% / 12) * 7);
+			width: calc((100% / 12) * 7 - #{$gutter-width});
 		}
 		.col-md-6 {
-			width: calc(100% / 2);
+			width: calc(100% / 2 - #{$gutter-width});
 		}
 		.col-md-5 {
-			width: calc((100% / 12) * 5);
+			width: calc((100% / 12) * 5 - #{$gutter-width});
 		}
 		.col-md-4 {
-			width: calc(100% / 3);
+			width: calc(100% / 3 - #{$gutter-width});
 		}
 		.col-md-3 {
-			width: calc(100% / 4);
+			width: calc(100% / 4 - #{$gutter-width});
 		}
 		.col-md-2 {
-			width: calc(100% / 6);
+			width: calc(100% / 6 - #{$gutter-width});
 		}
 		.col-md-1 {
-			width: calc(100% / 12);
+			width: calc(100% / 12 - #{$gutter-width});
 		}
 
 		.offset-md-11 {
-			margin-left: calc((100% / 12) * 11);
+			margin-left: calc((100% / 12) * 11 + #{$half-gutter-width});
 		}
 		.offset-md-10 {
-			margin-left: calc((100% / 12) * 10);
+			margin-left: calc((100% / 12) * 10 + #{$half-gutter-width});
 		}
 		.offset-md-9 {
-			margin-left: calc((100% / 12) * 9);
+			margin-left: calc((100% / 12) * 9 + #{$half-gutter-width});
 		}
 		.offset-md-8 {
-			margin-left: calc((100% / 12) * 8);
+			margin-left: calc((100% / 12) * 8 + #{$half-gutter-width});
 		}
 		.offset-md-7 {
-			margin-left: calc((100% / 12) * 7);
+			margin-left: calc((100% / 12) * 7 + #{$half-gutter-width});
 		}
 		.offset-md-6 {
-			margin-left: calc(100% / 2);
+			margin-left: calc(100% / 2 + #{$half-gutter-width});
 		}
 		.offset-md-5 {
-			margin-left: calc((100% / 12) * 5);
+			margin-left: calc((100% / 12) * 5 + #{$half-gutter-width});
 		}
 		.offset-md-4 {
-			margin-left: calc(100% / 3);
+			margin-left: calc(100% / 3 + #{$half-gutter-width});
 		}
 		.offset-md-3 {
-			margin-left: calc(100% / 4);
+			margin-left: calc(100% / 4 + #{$half-gutter-width});
 		}
 		.offset-md-2 {
-			margin-left: calc(100% / 6);
+			margin-left: calc(100% / 6 + #{$half-gutter-width});
 		}
 		.offset-md-1 {
-			margin-left: calc(100% / 12);
+			margin-left: calc(100% / 12 + #{$half-gutter-width});
 		}
 	}
 
 	@media (min-width: 1200px) { /* lg */
 		.col-lg-12 {
-			width: 100%;
+			width: calc(100% - #{$gutter-width});
 		}
 		.col-lg-11 {
-			width: calc((100% / 12) * 11);
+			width: calc((100% / 12) * 11 - #{$gutter-width});
 		}
 		.col-lg-10 {
-			width: calc((100% / 12) * 10);
+			width: calc((100% / 12) * 10 - #{$gutter-width});
 		}
 		.col-lg-9 {
-			width: calc((100% / 12) * 9);
+			width: calc((100% / 12) * 9 - #{$gutter-width});
 		}
 		.col-lg-8 {
-			width: calc((100% / 12) * 8);
+			width: calc((100% / 12) * 8 - #{$gutter-width});
 		}
 		.col-lg-7 {
-			width: calc((100% / 12) * 7);
+			width: calc((100% / 12) * 7 - #{$gutter-width});
 		}
 		.col-lg-6 {
-			width: calc(100% / 2);
+			width: calc(100% / 2 - #{$gutter-width});
 		}
 		.col-lg-5 {
-			width: calc((100% / 12) * 5);
+			width: calc((100% / 12) * 5 - #{$gutter-width});
 		}
 		.col-lg-4 {
-			width: calc(100% / 3);
+			width: calc(100% / 3 - #{$gutter-width});
 		}
 		.col-lg-3 {
-			width: calc(100% / 4);
+			width: calc(100% / 4 - #{$gutter-width});
 		}
 		.col-lg-2 {
-			width: calc(100% / 6);
+			width: calc(100% / 6 - #{$gutter-width});
 		}
 		.col-lg-1 {
-			width: calc(100% / 12);
+			width: calc(100% / 12 - #{$gutter-width});
 		}
 
 		.offset-lg-11 {
-			margin-left: calc((100% / 12) * 11);
+			margin-left: calc((100% / 12) * 11 + #{$half-gutter-width});
 		}
 		.offset-lg-10 {
-			margin-left: calc((100% / 12) * 10);
+			margin-left: calc((100% / 12) * 10 + #{$half-gutter-width});
 		}
 		.offset-lg-9 {
-			margin-left: calc((100% / 12) * 9);
+			margin-left: calc((100% / 12) * 9 + #{$half-gutter-width});
 		}
 		.offset-lg-8 {
-			margin-left: calc((100% / 12) * 8);
+			margin-left: calc((100% / 12) * 8 + #{$half-gutter-width});
 		}
 		.offset-lg-7 {
-			margin-left: calc((100% / 12) * 7);
+			margin-left: calc((100% / 12) * 7 + #{$half-gutter-width});
 		}
 		.offset-lg-6 {
-			margin-left: calc(100% / 2);
+			margin-left: calc(100% / 2 + #{$half-gutter-width});
 		}
 		.offset-lg-5 {
-			margin-left: calc((100% / 12) * 5);
+			margin-left: calc((100% / 12) * 5 + #{$half-gutter-width});
 		}
 		.offset-lg-4 {
-			margin-left: calc(100% / 3);
+			margin-left: calc(100% / 3 + #{$half-gutter-width});
 		}
 		.offset-lg-3 {
-			margin-left: calc(100% / 4);
+			margin-left: calc(100% / 4 + #{$half-gutter-width});
 		}
 		.offset-lg-2 {
-			margin-left: calc(100% / 6);
+			margin-left: calc(100% / 6 + #{$half-gutter-width});
 		}
 		.offset-lg-1 {
-			margin-left: calc(100% / 12);
+			margin-left: calc(100% / 12 + #{$half-gutter-width});
 		}
 	}
 }

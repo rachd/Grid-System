@@ -3,6 +3,10 @@
 @import 'float';
 @import 'grid';
 
+* {
+	box-sizing: border-box;
+}
+
 .row {
 	background-color: #444;
 }
