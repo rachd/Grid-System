@@ -1,18 +1,8 @@
-@import 'variables';
-@import 'mixins';
-@import 'float';
-@import 'grid';
-
 * {
 	box-sizing: border-box;
 }
 
-.row {
-	background-color: #444;
-}
-
-.row div {
-	background-color: #A4D4A4;
-	border: 1px solid white;
-	text-align: center;
-}
+@import 'variables';
+@import 'mixins';
+@import 'float';
+@import 'grid';
