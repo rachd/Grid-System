@@ -6,14 +6,75 @@
 	<title>Grid System</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/scripts.js"></script>
+
+	<style type="text/css">
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		.row {
+			text-align: center;
+		}
+
+		input {
+			margin-bottom: 30px;
+		}
+	</style>
 </head>
-<body>
+<body class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>CSS Grid System Generator</h1>
+			<p>Enter the desired values for your grid system and click submit. A zip file will download containing the necessary css and js files. This grid system is compatible with IE 9 and later.</p>
+		</div>
+	</div>
 
-<form action="/" method="post">
-  <input name="say" value="Hi">
-  <input name="to" value="Mom">
-  <button>Send my greetings</button>
-</form>
+	<div class="row">
+		<form action="/" method="post" class="col-xs-12">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<label for="numCols">Number of Columns</label>
+					<input type="number" name="numCols" id="numCols">
+				</div>
 
+				<div class="col-xs-12 col-sm-6">
+					<label for="maxWidth">Maximum Content Width</label>
+					<input type="number" name="maxWidth" id="maxWidth">
+				</div>
+
+				<div class="col-xs-12 col-sm-6">
+					<label for="gutter">Gutter Size</label>
+					<input type="number" name="gutter" id="gutter">
+				</div>
+
+				<div class="col-xs-12 col-sm-6">
+					<label for="smBreakpoint">SM Breakpoint (min width for col-sm)</label>
+					<input type="number" name="smBreakpoint" id="smBreakpoint">
+				</div>
+
+				<div class="col-xs-12 col-sm-6">
+					<label for="mdBreakpoint">MD Breakpoint (min width for col-md)</label>
+					<input type="number" name="mdBreakpoint" id="mdBreakpoint">
+				</div>
+
+				<div class="col-xs-12 col-sm-6">
+					<label for="lgBreakpoint">LG Breakpoint (min width for col-lg)</label>
+					<input type="number" name="lgBreakpoint" id="lgBreakpoint">
+				</div>
+
+				<div class="col-xs-12 col-sm-6">
+					<label for="prefix">Class Prefix</label>
+					<input type="text" name="prefix" id="prefix">
+				</div>
+			</div>
+
+		 	<div class="row">
+				<div class="col-xs-12">
+					<button type="submit">Generate My Stylesheet</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
