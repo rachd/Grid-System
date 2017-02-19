@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var cleanCSS = require('gulp-clean-css');
 var fs = require('fs');
 var express = require('express');
 var app = express();
@@ -42,9 +43,11 @@ const addVars = function(request) {
 	});
 }
 
-const compileSass = function(done) {
+const compileSass = function() {
   // eg: copy *.js files into `./dist`
   gulp.src('./app/new-scss/**/*.scss')
     .pipe(sass())
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('./app/new-css/'));
+    
 }
