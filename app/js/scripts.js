@@ -1,13 +1,11 @@
-// css grid feature detection
-
-(function(d){
-  var c = " ", f = "grid", fw = "-webkit-"+f, e = d.createElement('b');
+(function(doc){
+  var gridClass = " ", grid = "grid", webkitGrid = "-webkit-grid", element = doc.createElement('b');
   try { 
-    e.style.display = fw; 
-    e.style.display = f; 
-    c += (e.style.display == f || e.style.display == fw) ? f : "no-"+f; 
+    element.style.display = webkitGrid; 
+    element.style.display = grid; 
+    gridClass += (element.style.display == grid('') || element.style.display == webkitGrid) ? grid : "no-"+grid; 
   } catch(e) { 
-    c += "no-"+f; 
+    gridClass += "no-"+grid; 
   }
-  d.documentElement.className += c; 
+  doc.documentElement.className += gridClass; 
 })(document);

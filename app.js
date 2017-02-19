@@ -1,11 +1,17 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var rename = require('gulp-rename');
 var cleanCSS = require('gulp-clean-css');
 var fs = require('fs');
 var express = require('express');
+// var archiver = require('archiver');
+// var archive = archiver.create('zip', {});
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+
+// var output = fs.createWriteStream(__dirname + '/grid_system.zip');
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -14,11 +20,16 @@ app.get('/', function (request, response) {
 });
 
 app.post('/', function (request, response) {
-  // response.send('Got a POST request');
-  // response.sendFile(path.join(__dirname + '/app/css/main.css'));
   addVars(request);
 
   compileSass();
+
+  // archive.pipe(output);
+  // archive
+  // .directory(__dirname + '/app/return-files')
+  // .finalize();
+
+  // response.download(path.join(__dirname + '/grid_system.zip'));
 });
 
 app.use(express.static('app'));
@@ -44,10 +55,10 @@ const addVars = function(request) {
 }
 
 const compileSass = function() {
-  // eg: copy *.js files into `./dist`
   gulp.src('./app/new-scss/**/*.scss')
     .pipe(sass())
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./app/new-css/'));
+    .pipe(rename('grid-system.min.css'))
+    .pipe(gulp.dest('./app/return-files/'));
     
 }
