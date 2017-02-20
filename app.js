@@ -20,6 +20,8 @@ app.get('/', function (request, response) {
 });
 
 app.post('/', function (request, response) {
+  loopThroughCols(parseInt(request.body.numCols));
+
   addVars(request);
 
   compileSass();
@@ -38,9 +40,66 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 });
 
+const loopThroughCols = function(numCols) {
+  let gridFileContents = `.grid {
+    .row {
+    display: grid;
+    grid-template-columns: repeat(${numCols}, 1fr);
+    max-width: $content-max-width;
+    margin: 0 auto;
+    grid-column-gap: $gutter-width;
+  }
+
+  [class*='col-'] {
+    grid-column-end: span ${numCols};
+  }\n`;
+  for (let i = numCols; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.col-xs-' + i + ' { grid-column-end: span ' + i + '; }\n');
+  }
+
+  for (let i = numCols - 1; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.offset-xs-' + i + ' { grid-column-start: '+ (i + 1) + '; }\n');
+  }
+
+  gridFileContents = gridFileContents.concat('@media (min-width: $small-breakpoint) {\n');
+
+  for (let i = numCols; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.col-sm-' + i + ' { grid-column-end: span ' + i + '; }\n');
+  }
+
+  for (let i = numCols - 1; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.offset-sm-' + i + ' { grid-column-start: '+ (i + 1) + '; }\n');
+  } 
+
+  gridFileContents = gridFileContents.concat('}\n @media (min-width: $medium-breakpoint) {\n');
+
+  for (let i = numCols; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.col-md-' + i + ' { grid-column-end: span ' + i + '; }\n');
+  }
+
+  for (let i = numCols - 1; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.offset-md-' + i + ' { grid-column-start: '+ (i + 1) + '; }\n');
+  } 
+
+  gridFileContents = gridFileContents.concat('}\n @media (min-width: $large-breakpoint) {\n');
+
+  for (let i = numCols; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.col-lg-' + i + ' { grid-column-end: span ' + i + '; }\n');
+  }
+
+  for (let i = numCols - 1; i > 0; i--) {
+    gridFileContents = gridFileContents.concat('.offset-lg-' + i + ' { grid-column-start: '+ (i + 1) + '; }\n');
+  } 
+
+  gridFileContents = gridFileContents.concat('}\n }');
+
+  fs.writeFile('app/new-scss/_grid.scss', gridFileContents, (err) => {
+    if (err) throw err;
+  });
+}
+
 const addVars = function(request) {
-	const numCols = request.body.numCols,
-		gutter = request.body.gutter,
+	const gutter = request.body.gutter,
 		halfGutter = parseInt(gutter) / 2,
 		maxWidth = request.body.maxWidth,
 		smBreakpoint = request.body.smBreakpoint,
