@@ -1,3 +1,6 @@
+(function() {
+"use strict";
+
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
@@ -20,7 +23,8 @@ app.get('/', function (request, response) {
 });
 
 app.post('/', function (request, response) {
-  loopThroughCols(parseInt(request.body.numCols));
+  generateGridStyles(parseInt(request.body.numCols));
+  generateFloatStyles(parseInt(request.body.numCols));
 
   addVars(request);
 
@@ -31,7 +35,7 @@ app.post('/', function (request, response) {
   // .directory(__dirname + '/app/return-files')
   // .finalize();
 
-  // response.download(path.join(__dirname + '/grid_system.zip'));
+  response.download(path.join(__dirname + '/app/return-files/grid-system.min.css'));
 });
 
 app.use(express.static('app'));
@@ -40,7 +44,7 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 });
 
-const loopThroughCols = function(numCols) {
+const generateGridStyles = function(numCols) {
   let gridFileContents = `.grid {
     .row {
     display: grid;
@@ -53,6 +57,7 @@ const loopThroughCols = function(numCols) {
   [class*='col-'] {
     grid-column-end: span ${numCols};
   }\n`;
+
   for (let i = numCols; i > 0; i--) {
     gridFileContents = gridFileContents.concat('.col-xs-' + i + ' { grid-column-end: span ' + i + '; }\n');
   }
@@ -98,6 +103,72 @@ const loopThroughCols = function(numCols) {
   });
 }
 
+const generateFloatStyles = function(numCols) {
+	let floatFileContents = `.no-grid {
+	.container {
+		max-width: $content-max-width;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+
+	.row {
+		width: calc(100% + #{$gutter-width});
+		margin-left: -$half-gutter-width;
+		@include clearfix;
+	}
+
+	[class*='col-'] {
+		float: left;
+		width: 100%;
+		min-height: 1px;
+		margin: 0 $half-gutter-width;
+	}\n`;
+
+	for (let i = numCols; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.col-xs-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+	}
+
+	for (let i = numCols - 1; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.offset-xs-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+	}
+
+	floatFileContents = floatFileContents.concat('@media (min-width: $small-breakpoint) {\n');
+
+	for (let i = numCols; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.col-sm-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+	}
+
+	for (let i = numCols - 1; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.offset-sm-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+	}
+
+	floatFileContents = floatFileContents.concat('}\n@media (min-width: $medium-breakpoint) {\n');
+
+	for (let i = numCols; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.col-md-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+	}
+
+	for (let i = numCols - 1; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.offset-md-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+	}
+
+	floatFileContents = floatFileContents.concat('}\n @media (min-width: $large-breakpoint) {\n');
+
+	for (let i = numCols; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.col-lg-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+	}
+
+	for (let i = numCols - 1; i > 0; i--) {
+		floatFileContents = floatFileContents.concat('.offset-lg-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+	}
+
+	floatFileContents = floatFileContents.concat('}\n}');
+
+	fs.writeFile('app/new-scss/_float.scss', floatFileContents, (err) => {
+	    if (err) throw err;
+	});
+}
+
 const addVars = function(request) {
 	const gutter = request.body.gutter,
 		halfGutter = parseInt(gutter) / 2,
@@ -121,3 +192,4 @@ const compileSass = function() {
     .pipe(gulp.dest('./app/return-files/'));
     
 }
+})();
