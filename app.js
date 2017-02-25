@@ -5,15 +5,13 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var cleanCSS = require('gulp-clean-css');
+var cssPrefix = require('gulp-css-prefix');
 var fs = require('fs');
 var express = require('express');
-// var archiver = require('archiver');
-// var archive = archiver.create('zip', {});
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
-// var output = fs.createWriteStream(__dirname + '/grid_system.zip');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,19 +21,13 @@ app.get('/', function (request, response) {
 });
 
 app.post('/', function (request, response) {
-  generateGridStyles(parseInt(request.body.numCols));
-  generateFloatStyles(parseInt(request.body.numCols));
+	
+	generateGridStyles(parseInt(request.body.numCols));
+	generateFloatStyles(parseInt(request.body.numCols));
 
-  addVars(request);
+	addVars(request);
 
-  compileSass();
-
-  // archive.pipe(output);
-  // archive
-  // .directory(__dirname + '/app/return-files')
-  // .finalize();
-
-  response.download(path.join(__dirname + '/app/return-files/grid-system.min.css'));
+	compileSass(request.body.prefix, response);
 });
 
 app.use(express.static('app'));
@@ -125,41 +117,41 @@ const generateFloatStyles = function(numCols) {
 	}\n`;
 
 	for (let i = numCols; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.col-xs-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.col-xs-' + i + '{ \nwidth: calc((100% / ' + numCols + ') * ' + i + ' - #{$gutter-width});\n}');
 	}
 
 	for (let i = numCols - 1; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.offset-xs-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.offset-xs-' + i + ' {\nmargin-left: calc((100% / ' + numCols + ') * ' + i + ' + #{$half-gutter-width});\n}');
 	}
 
 	floatFileContents = floatFileContents.concat('@media (min-width: $small-breakpoint) {\n');
 
 	for (let i = numCols; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.col-sm-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.col-sm-' + i + '{ \nwidth: calc((100% / ' + numCols + ') * ' + i + ' - #{$gutter-width});\n}');
 	}
 
 	for (let i = numCols - 1; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.offset-sm-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.offset-sm-' + i + ' {\nmargin-left: calc((100% / ' + numCols + ') * ' + i + ' + #{$half-gutter-width});\n}');
 	}
 
 	floatFileContents = floatFileContents.concat('}\n@media (min-width: $medium-breakpoint) {\n');
 
 	for (let i = numCols; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.col-md-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.col-md-' + i + '{ \nwidth: calc((100% / ' + numCols + ') * ' + i + ' - #{$gutter-width});\n}');
 	}
 
 	for (let i = numCols - 1; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.offset-md-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.offset-md-' + i + ' {\nmargin-left: calc((100% / ' + numCols + ') * ' + i + ' + #{$half-gutter-width});\n}');
 	}
 
 	floatFileContents = floatFileContents.concat('}\n @media (min-width: $large-breakpoint) {\n');
 
 	for (let i = numCols; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.col-lg-' + i + '{ \nwidth: calc((100% / 12) * ' + numCols + ' - #{$gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.col-lg-' + i + '{ \nwidth: calc((100% / ' + numCols + ') * ' + i + ' - #{$gutter-width});\n}');
 	}
 
 	for (let i = numCols - 1; i > 0; i--) {
-		floatFileContents = floatFileContents.concat('.offset-lg-' + i + ' {\nmargin-left: calc((100% / 12) * ' + i + ' + #{$half-gutter-width});\n}');
+		floatFileContents = floatFileContents.concat('.offset-lg-' + i + ' {\nmargin-left: calc((100% / ' + numCols + ') * ' + i + ' + #{$half-gutter-width});\n}');
 	}
 
 	floatFileContents = floatFileContents.concat('}\n}');
@@ -184,12 +176,15 @@ const addVars = function(request) {
 	});
 }
 
-const compileSass = function() {
+const compileSass = function(prefix, response) {
   gulp.src('./app/new-scss/**/*.scss')
     .pipe(sass())
+    // .pipe(cssPrefix(prefix + '-'))
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(rename('grid-system.min.css'))
-    .pipe(gulp.dest('./app/return-files/'));
-    
-}
+    .pipe(gulp.dest('./app/return-files/'))
+   	.on('end', function() {
+   		response.download(path.join(__dirname + '/app/return-files/grid-system.min.css'));
+	});
+  }
 })();
