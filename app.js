@@ -32,7 +32,7 @@ app.post('/', function (request, response) {
 
 app.use(express.static('app'));
 
-app.listen(80, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 3000!')
 });
 
