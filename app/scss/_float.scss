@@ -89,7 +89,7 @@
 		margin-left: calc(100% / 12 + #{$half-gutter-width});
 	}
 
-	@media (min-width: 768px) { /* sm md lg */
+	@media (min-width: $small-breakpoint) { /* sm md lg */
 		.col-sm-12 {
 			width: calc(100% - #{$gutter-width});
 		}
@@ -162,7 +162,7 @@
 		}
 	}
 
-	@media (min-width: 992px) { /* md and lg */
+	@media (min-width: $medium-breakpoint) { /* md and lg */
 		.col-md-12 {
 			width: calc(100% - #{$gutter-width});
 		}
@@ -235,7 +235,7 @@
 		}
 	}
 
-	@media (min-width: 1200px) { /* lg */
+	@media (min-width: $large-breakpoint) { /* lg */
 		.col-lg-12 {
 			width: calc(100% - #{$gutter-width});
 		}

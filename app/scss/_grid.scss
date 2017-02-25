@@ -88,7 +88,7 @@
 		grid-column-start: 2;
 	}
 
-	@media (min-width: 768px) { /* sm md lg */
+	@media (min-width: $small-breakpoint) { /* sm md lg */
 		.col-sm-12 {
 			grid-column-end: span 12;
 		}
@@ -161,7 +161,7 @@
 		}
 	}
 
-	@media (min-width: 992px) { /* md and lg */
+	@media (min-width: $medium-breakpoint) { /* md and lg */
 		.col-md-12 {
 			grid-column-end: span 12;
 		}
@@ -234,7 +234,7 @@
 		}
 	}
 
-	@media (min-width: 1200px) { /* lg */
+	@media (min-width: $large-breakpoint) { /* lg */
 		.col-lg-12 {
 			grid-column-end: span 12;
 		}
