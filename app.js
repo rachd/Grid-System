@@ -100,7 +100,7 @@ const generateFloatStyles = function(numCols) {
 	.container {
 		max-width: $content-max-width;
 		margin: 0 auto;
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 
 	.row {
