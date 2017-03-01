@@ -4,7 +4,7 @@
 .no-grid .container {
   max-width: 1400px;
   margin: 0 auto;
-  overflow: hidden; }
+  overflow-x: hidden; }
 
 .no-grid .row {
   width: calc(100% + 10px);
